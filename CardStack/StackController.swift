@@ -22,24 +22,20 @@ class StackController: ObservableObject {
     @Published var isAnimating: Bool = false
     
     func changeCardByIndex(state: Double) {
-        let lastIndex = self.cards.count - 1
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {return}
-            withAnimation {
-                self.cards[self.currentCard].offset = state
-                self.cards[lastIndex].opacity = 1
-            }
+        withAnimation {
+            self.cards[self.currentCard].offset = state
         }
     }
     
     func performAnimationByIndex() {
-        self.isAnimating = true
+        let lastIndex = cards.count - 1
+        isAnimating = true
         withAnimation(.easeInOut(duration: 0.4)) {
             if !isReversed {
                 cards[currentCard].offset = ScreenDimension.height
-                cards[currentCard].padding = 10
                 cards[currentCard].opacity = 0
                 cards[currentCard + 1].padding = 0
+                cards[lastIndex].opacity = 1
             }
             animationEnded = Double.random(in: 0...4)
         }
@@ -57,13 +53,13 @@ class StackController: ObservableObject {
                 cards[index].padding = 10
                 cards[index].offset = 0
             }
-            isAnimating = false
         }
+        isAnimating = false
     }
     
     func resetValue() {
         withAnimation {
-            self.cards[self.currentCard].offset = 0
+            cards[currentCard].offset = 0
         }
     }
     

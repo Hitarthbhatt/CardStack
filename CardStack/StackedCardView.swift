@@ -39,10 +39,9 @@ struct StackedCardView: View {
         DragGesture()
             .updating($translation, body: { value, state, _ in
                 state = value.translation.height
-                print(state)
                 DispatchQueue.main.async {
                     controller.isReversed = value.translation.height < 0 ? true : false
-                    if value.translation.height > 0 && !controller.isAnimating {
+                    if value.translation.height > 0 {
                         controller.changeCardByIndex(state: value.translation.height)
                     }
                 }
