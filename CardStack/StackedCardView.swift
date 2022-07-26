@@ -8,19 +8,32 @@
 
 import SwiftUI
 
-struct StackedCardView: View {
+struct StackedCardView<Content: View, Item>: View {
     
-    @StateObject var controller = StackController()
+    private let items: [Item]
+    private let content: (Item) -> Content
+    private var onItemChange: (Int) -> Void
+    private var cardHeight: CGFloat
+    private var cardWidth: CGFloat
+    
+    
+    @StateObject var controller = StackController<Item>()
     @GestureState var translation: CGFloat = .zero
-    var cardHeight: CGFloat = 200
+    
+    init(items: [Item], @ViewBuilder content: @escaping (Item) -> Content) {
+        self.items = items
+        self.content = content
+        
+        self.onItemChange = { _ in }
+        self.cardWidth = ScreenDimension.width/1.5
+        self.cardHeight = 200
+    }
     
     var body: some View {
         ZStack {
             ForEach(controller.cards) { card in
-                Rectangle()
-                    .foregroundColor(card.color)
-                    .cornerRadius(4)
-                    .frame(maxWidth: ScreenDimension.width/1.5 - 10)
+                content(card.item)
+                    .frame(maxWidth: cardWidth - 10)
                     .frame(height: cardHeight)
                     .padding(.top, -card.padding)
                     .zIndex(Double(controller.cards.count - controller.getCardIndex(of: card)))
@@ -31,7 +44,13 @@ struct StackedCardView: View {
         .gesture(dragGesture())
         .disabled(controller.isAnimating)
         .onAnimationCompletion(for: controller.animationEnded) {
-            controller.completeAnimation()
+            controller.completeAnimation(items: items)
+        }
+        .onAppear {
+            controller.setCards(items: items)
+        }
+        .onChange(of: controller.itemIndex) { newValue in
+            onItemChange(newValue)
         }
     }
     
@@ -41,7 +60,7 @@ struct StackedCardView: View {
                 state = value.translation.height
                 DispatchQueue.main.async {
                     controller.isReversed = value.translation.height < 0 ? true : false
-                    if value.translation.height > 0 {
+                    if value.translation.height > 0 && controller.itemIndex < items.count - 1 {
                         controller.changeCardByIndex(state: value.translation.height)
                     }
                 }
@@ -50,7 +69,7 @@ struct StackedCardView: View {
                 let position = value.translation.height
                 DispatchQueue.main.async {
                     if position > cardHeight/2 || position < -cardHeight/2 {
-                        controller.performAnimationByIndex()
+                        controller.performAnimationByIndex(items: items)
                     } else {
                         controller.resetValue()
                     }
@@ -58,4 +77,24 @@ struct StackedCardView: View {
             })
     }
     
+}
+
+extension StackedCardView {
+    public func cardHeight(_ height: Double) -> StackedCardView {
+        var result = self
+        result.cardHeight = height
+        return result
+    }
+    
+    public func cardWidht(_ width: Double) -> StackedCardView {
+        var result = self
+        result.cardWidth = width
+        return result
+    }
+    
+    public func onCardChange(_ onChange: @escaping (Int) -> Void) -> StackedCardView {
+        var result = self
+        result.onItemChange = onChange
+        return result
+    }
 }

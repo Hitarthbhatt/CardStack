@@ -12,7 +12,7 @@
 		BC4D7FDE288579B900C5EC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4D7FDD288579B900C5EC63 /* Assets.xcassets */; };
 		BC4D7FE1288579B900C5EC63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4D7FE0288579B900C5EC63 /* Preview Assets.xcassets */; };
 		BC4D803F2885BCD700C5EC63 /* StackedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D803E2885BCD700C5EC63 /* StackedCardView.swift */; };
-		BCEACA24288E99ED005D5BC4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEACA23288E99ED005D5BC4 /* CardView.swift */; };
+		BC9F7E2A28901D6B002BBA64 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F7E2928901D6B002BBA64 /* CardModel.swift */; };
 		BCEACA27288E9D4E005D5BC4 /* AnimationCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEACA26288E9D4E005D5BC4 /* AnimationCompletion.swift */; };
 		BCEACA2A288EA46E005D5BC4 /* ScreenDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEACA29288EA46E005D5BC4 /* ScreenDimension.swift */; };
 		BCEACA2E288EB504005D5BC4 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEACA2D288EB504005D5BC4 /* ArrayExt.swift */; };
@@ -26,7 +26,7 @@
 		BC4D7FDD288579B900C5EC63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC4D7FE0288579B900C5EC63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BC4D803E2885BCD700C5EC63 /* StackedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCardView.swift; sourceTree = "<group>"; };
-		BCEACA23288E99ED005D5BC4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		BC9F7E2928901D6B002BBA64 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		BCEACA26288E9D4E005D5BC4 /* AnimationCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCompletion.swift; sourceTree = "<group>"; };
 		BCEACA29288EA46E005D5BC4 /* ScreenDimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDimension.swift; sourceTree = "<group>"; };
 		BCEACA2D288EB504005D5BC4 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
@@ -63,9 +63,7 @@
 		BC4D7FD8288579B700C5EC63 /* CardStack */ = {
 			isa = PBXGroup;
 			children = (
-				BCEACA2B288EB4F6005D5BC4 /* Extension */,
 				BCEACA28288EA462005D5BC4 /* Utlis */,
-				BCEACA25288E9D3F005D5BC4 /* Modifier */,
 				BCEACA2F288EB6F4005D5BC4 /* MainScreens */,
 				BC4D80392885914300C5EC63 /* StackedCard */,
 				BC4D7FDD288579B900C5EC63 /* Assets.xcassets */,
@@ -85,11 +83,37 @@
 		BC4D80392885914300C5EC63 /* StackedCard */ = {
 			isa = PBXGroup;
 			children = (
-				BCEACA23288E99ED005D5BC4 /* CardView.swift */,
-				BC4D803E2885BCD700C5EC63 /* StackedCardView.swift */,
-				BCEACA30288EB726005D5BC4 /* StackController.swift */,
+				BCEACA2B288EB4F6005D5BC4 /* Extension */,
+				BCEACA25288E9D3F005D5BC4 /* Modifier */,
+				BC9F7E2828901D36002BBA64 /* View */,
+				BC9F7E2728901D2F002BBA64 /* ViewModel */,
+				BC9F7E2628901D29002BBA64 /* Model */,
 			);
 			name = StackedCard;
+			sourceTree = "<group>";
+		};
+		BC9F7E2628901D29002BBA64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F7E2928901D6B002BBA64 /* CardModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		BC9F7E2728901D2F002BBA64 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BCEACA30288EB726005D5BC4 /* StackController.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		BC9F7E2828901D36002BBA64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BC4D803E2885BCD700C5EC63 /* StackedCardView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		BCEACA25288E9D3F005D5BC4 /* Modifier */ = {
@@ -199,8 +223,8 @@
 				BC4D7FDC288579B700C5EC63 /* ContentView.swift in Sources */,
 				BCEACA31288EB726005D5BC4 /* StackController.swift in Sources */,
 				BCEACA2A288EA46E005D5BC4 /* ScreenDimension.swift in Sources */,
-				BCEACA24288E99ED005D5BC4 /* CardView.swift in Sources */,
 				BCEACA27288E9D4E005D5BC4 /* AnimationCompletion.swift in Sources */,
+				BC9F7E2A28901D6B002BBA64 /* CardModel.swift in Sources */,
 				BCEACA2E288EB504005D5BC4 /* ArrayExt.swift in Sources */,
 				BC4D7FDA288579B700C5EC63 /* CardStackApp.swift in Sources */,
 			);
