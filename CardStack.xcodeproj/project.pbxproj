@@ -50,6 +50,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC4CEE9A289ACF2E004DAD1C /* Stacked */ = {
+			isa = PBXGroup;
+			children = (
+				BC4CEE9F289ACF51004DAD1C /* Model */,
+				BC4CEE9E289ACF4C004DAD1C /* ViewModel */,
+				BC4CEE9D289ACF4A004DAD1C /* View */,
+				BC4CEE9C289ACF46004DAD1C /* Modifier */,
+				BC4CEE9B289ACF3C004DAD1C /* Extension */,
+			);
+			path = Stacked;
+			sourceTree = "<group>";
+		};
+		BC4CEE9B289ACF3C004DAD1C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BCEACA2D288EB504005D5BC4 /* ArrayExt.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		BC4CEE9C289ACF46004DAD1C /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				BCEACA26288E9D4E005D5BC4 /* AnimationCompletion.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
+		BC4CEE9D289ACF4A004DAD1C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BC4D803E2885BCD700C5EC63 /* StackedCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BC4CEE9E289ACF4C004DAD1C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BCEACA30288EB726005D5BC4 /* StackController.swift */,
+				BCFA48002892924E00CF4CFB /* CardController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BC4CEE9F289ACF51004DAD1C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F7E2928901D6B002BBA64 /* CardModel.swift */,
+				BC05599C289836C100D2F002 /* CardUpdate.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		BC4D7FCD288579B700C5EC63 = {
 			isa = PBXGroup;
 			children = (
@@ -71,7 +125,7 @@
 			children = (
 				BCEACA28288EA462005D5BC4 /* Utlis */,
 				BCEACA2F288EB6F4005D5BC4 /* MainScreens */,
-				BC4D80392885914300C5EC63 /* StackedCard */,
+				BC4CEE9A289ACF2E004DAD1C /* Stacked */,
 				BC4D7FDD288579B900C5EC63 /* Assets.xcassets */,
 				BC4D7FDF288579B900C5EC63 /* Preview Content */,
 			);
@@ -86,66 +140,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		BC4D80392885914300C5EC63 /* StackedCard */ = {
-			isa = PBXGroup;
-			children = (
-				BCEACA2B288EB4F6005D5BC4 /* Extension */,
-				BCEACA25288E9D3F005D5BC4 /* Modifier */,
-				BC9F7E2828901D36002BBA64 /* View */,
-				BC9F7E2728901D2F002BBA64 /* ViewModel */,
-				BC9F7E2628901D29002BBA64 /* Model */,
-			);
-			name = StackedCard;
-			sourceTree = "<group>";
-		};
-		BC9F7E2628901D29002BBA64 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				BC9F7E2928901D6B002BBA64 /* CardModel.swift */,
-				BC05599C289836C100D2F002 /* CardUpdate.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		BC9F7E2728901D2F002BBA64 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				BCEACA30288EB726005D5BC4 /* StackController.swift */,
-				BCFA48002892924E00CF4CFB /* CardController.swift */,
-			);
-			name = ViewModel;
-			sourceTree = "<group>";
-		};
-		BC9F7E2828901D36002BBA64 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				BC4D803E2885BCD700C5EC63 /* StackedCardView.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		BCEACA25288E9D3F005D5BC4 /* Modifier */ = {
-			isa = PBXGroup;
-			children = (
-				BCEACA26288E9D4E005D5BC4 /* AnimationCompletion.swift */,
-			);
-			name = Modifier;
-			sourceTree = "<group>";
-		};
 		BCEACA28288EA462005D5BC4 /* Utlis */ = {
 			isa = PBXGroup;
 			children = (
 				BCEACA29288EA46E005D5BC4 /* ScreenDimension.swift */,
 			);
 			name = Utlis;
-			sourceTree = "<group>";
-		};
-		BCEACA2B288EB4F6005D5BC4 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				BCEACA2D288EB504005D5BC4 /* ArrayExt.swift */,
-			);
-			name = Extension;
 			sourceTree = "<group>";
 		};
 		BCEACA2F288EB6F4005D5BC4 /* MainScreens */ = {
