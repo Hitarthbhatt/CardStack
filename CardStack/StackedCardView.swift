@@ -11,46 +11,56 @@ import SwiftUI
 struct StackedCardView<Content: View, Item>: View {
     
     private let items: [Item]
+    private let cardControl: CardController
     private let content: (Item) -> Content
     private var onItemChange: (Int) -> Void
     private var cardHeight: CGFloat
     private var cardWidth: CGFloat
     
     
-    @StateObject var controller = StackController<Item>()
+    @StateObject var stackController = StackController<Item>()
     @GestureState var translation: CGFloat = .zero
     
-    init(items: [Item], @ViewBuilder content: @escaping (Item) -> Content) {
+    init(items: [Item], cardControl: CardController, @ViewBuilder content: @escaping (Item) -> Content) {
         self.items = items
+        self.cardControl = cardControl
         self.content = content
         
         self.onItemChange = { _ in }
         self.cardWidth = ScreenDimension.width/1.5
         self.cardHeight = 200
+        
     }
     
     var body: some View {
         ZStack {
-            ForEach(controller.cards) { card in
+            ForEach(stackController.cards) { card in
                 content(card.item)
                     .frame(maxWidth: cardWidth - 10)
                     .frame(height: cardHeight)
                     .padding(.top, -card.padding)
-                    .zIndex(Double(controller.cards.count - controller.getCardIndex(of: card)))
+                    .zIndex(Double(stackController.cards.count - stackController.getCardIndex(of: card)))
                     .offset(y: card.offset)
                     .opacity(card.opacity)
             } // ForEack
         } // ZStack
         .gesture(dragGesture())
-        .disabled(controller.isAnimating)
-        .onAnimationCompletion(for: controller.animationEnded) {
-            controller.completeAnimation(items: items)
+        .disabled(stackController.isAnimating)
+        .onAnimationCompletion(for: stackController.animationEnded) {
+            stackController.completeAnimation(items: items)
         }
         .onAppear {
-            controller.setCards(items: items)
+            if stackController.cards.isEmpty {
+                stackController.setCards(index: 0, items: items)
+            }
         }
-        .onChange(of: controller.itemIndex) { newValue in
+        .onChange(of: stackController.itemIndex) { newValue in
             onItemChange(newValue)
+        }
+        .onReceive(cardControl.cardUpdate) { type in
+            if !stackController.isAnimating {
+                stackController.updateCards(type: type, items: items)
+            }
         }
     }
     
@@ -59,9 +69,9 @@ struct StackedCardView<Content: View, Item>: View {
             .updating($translation, body: { value, state, _ in
                 state = value.translation.height
                 DispatchQueue.main.async {
-                    controller.isReversed = value.translation.height < 0 ? true : false
-                    if value.translation.height > 0 && controller.itemIndex < items.count - 1 {
-                        controller.changeCardByIndex(state: value.translation.height)
+                    stackController.isReversed = value.translation.height < 0 ? true : false
+                    if value.translation.height > 0 && stackController.itemIndex < items.count - 1 {
+                        stackController.changeCardByIndex(state: value.translation.height)
                     }
                 }
             })
@@ -69,9 +79,9 @@ struct StackedCardView<Content: View, Item>: View {
                 let position = value.translation.height
                 DispatchQueue.main.async {
                     if position > cardHeight/2 || position < -cardHeight/2 {
-                        controller.performAnimationByIndex(items: items)
+                        stackController.performAnimationByIndex(items: items)
                     } else {
-                        controller.resetValue()
+                        stackController.resetValue()
                     }
                 }
             })

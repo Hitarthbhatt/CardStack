@@ -9,6 +9,7 @@ import SwiftUI
 
 class StackController<Item>: ObservableObject {
     
+    // MARK: - Variables.
     @Published var cards: [Cards<Item>] = []
     
     @Published var itemIndex: Int = 0
@@ -18,12 +19,27 @@ class StackController<Item>: ObservableObject {
     @Published var isReversed: Bool = false
     @Published var isAnimating: Bool = false
     
-    func setCards(items: [Item]) {
-        for i in 0...2 {
-            if i == 0 {
+    // MARK: - Card configuration methods.
+    func setCards(index: Int, items: [Item]) {
+        cards.removeAll()
+        
+        if index < 0 {
+            itemIndex = 0
+        } else if index > items.count {
+            itemIndex = items.count - 1
+        } else {
+            itemIndex = index
+        }
+        
+        for i in itemIndex...(itemIndex + 2) {
+            if i == itemIndex {
                 cards.append(Cards(id: i, item: items[i], offset: 0, opacity: 1, padding: 0))
             } else {
-                cards.append(Cards(id: i, item: items[i], offset: 0, opacity: 1, padding: 10))
+                if items.indices.contains(i) {
+                    cards.append(Cards(id: i, item: items[i], offset: 0, opacity: 1, padding: 10))
+                } else {
+                    cards.append(Cards(id: i, item: items[itemIndex], offset: 0, opacity: 1, padding: 10))
+                }
             }
         }
     }
@@ -36,18 +52,42 @@ class StackController<Item>: ObservableObject {
         }
     }
     
+    func updateCards(type: CardUpdate, items: [Item]) {
+        switch type {
+            case .previous:
+                isReversed = true
+                if itemIndex > 0 {
+                    performAnimationByIndex(items: items)
+                }
+            case .next:
+                isReversed = false
+                if itemIndex < items.count - 1 {
+                    performAnimationByIndex(items: items)
+                }
+            case .first:
+                return
+            case .last:
+                return
+            case .atIndex(let index):
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    setCards(index: index, items: items)
+                }
+        }
+    }
+    
+    // MARK: - Cards animation methods.
     func changeCardByIndex(state: Double) {
         withAnimation {
             self.cards[self.currentCard].offset = state
         }
     }
     
-    func performAnimationByIndex(items: [Item]) {
+    func performAnimationByIndex(items: [Item], duration: Double = 0.4) {
         isAnimating = true
         let lastIndex = cards.count - 1
         let lastItemIndex = items.count - 1
         
-        withAnimation(.easeInOut(duration: 0.4)) {
+        withAnimation(.interactiveSpring(response: isReversed ? duration/10 : duration, dampingFraction: 1, blendDuration: 1)) {
             if !isReversed && itemIndex < lastItemIndex  {
                 cards[currentCard].offset = ScreenDimension.height
                 cards[currentCard].opacity = 0
@@ -66,11 +106,11 @@ class StackController<Item>: ObservableObject {
         }
     }
     
-    func completeAnimation(items: [Item]) {
+    func completeAnimation(items: [Item], duration: Double = 0.4) {
         isReversed ? cards.rotateSingleLeft() : cards.rotateSingleRight()
         cards[currentCard].offset = isReversed ? ScreenDimension.height : 0
         changeCardItem(items: items)
-        withAnimation(.easeInOut(duration: 0.4)) {
+        withAnimation(.interactiveSpring(response: isReversed ? duration : duration/10 , dampingFraction: 0.9, blendDuration: 0.5)) {
             cards[currentCard].padding = 0
             cards[currentCard].offset = 0
             cards[currentCard].opacity = 1
@@ -80,6 +120,7 @@ class StackController<Item>: ObservableObject {
                 cards[index].offset = 0
             }
         }
+        
         isAnimating = false
     }
     
@@ -89,6 +130,7 @@ class StackController<Item>: ObservableObject {
         }
     }
     
+    // MARK: - Util methods.
     func getCardIndex(of currentCard: Cards<Item>) -> Int {
         let index = cards.firstIndex { card in
             return card.id == currentCard.id

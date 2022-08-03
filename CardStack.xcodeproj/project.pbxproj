@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC05599D289836C100D2F002 /* CardUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC05599C289836C100D2F002 /* CardUpdate.swift */; };
 		BC4D7FDA288579B700C5EC63 /* CardStackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D7FD9288579B700C5EC63 /* CardStackApp.swift */; };
 		BC4D7FDC288579B700C5EC63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D7FDB288579B700C5EC63 /* ContentView.swift */; };
 		BC4D7FDE288579B900C5EC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4D7FDD288579B900C5EC63 /* Assets.xcassets */; };
@@ -17,9 +18,12 @@
 		BCEACA2A288EA46E005D5BC4 /* ScreenDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEACA29288EA46E005D5BC4 /* ScreenDimension.swift */; };
 		BCEACA2E288EB504005D5BC4 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEACA2D288EB504005D5BC4 /* ArrayExt.swift */; };
 		BCEACA31288EB726005D5BC4 /* StackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEACA30288EB726005D5BC4 /* StackController.swift */; };
+		BCF4C71A2894271000A4A634 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF4C7192894271000A4A634 /* SwiftUIView.swift */; };
+		BCFA48012892924E00CF4CFB /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFA48002892924E00CF4CFB /* CardController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC05599C289836C100D2F002 /* CardUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardUpdate.swift; sourceTree = "<group>"; };
 		BC4D7FD6288579B700C5EC63 /* CardStack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardStack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4D7FD9288579B700C5EC63 /* CardStackApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardStackApp.swift; sourceTree = "<group>"; };
 		BC4D7FDB288579B700C5EC63 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -31,6 +35,8 @@
 		BCEACA29288EA46E005D5BC4 /* ScreenDimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDimension.swift; sourceTree = "<group>"; };
 		BCEACA2D288EB504005D5BC4 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		BCEACA30288EB726005D5BC4 /* StackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackController.swift; sourceTree = "<group>"; };
+		BCF4C7192894271000A4A634 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		BCFA48002892924E00CF4CFB /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				BC9F7E2928901D6B002BBA64 /* CardModel.swift */,
+				BC05599C289836C100D2F002 /* CardUpdate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -104,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				BCEACA30288EB726005D5BC4 /* StackController.swift */,
+				BCFA48002892924E00CF4CFB /* CardController.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -145,6 +153,7 @@
 			children = (
 				BC4D7FDB288579B700C5EC63 /* ContentView.swift */,
 				BC4D7FD9288579B700C5EC63 /* CardStackApp.swift */,
+				BCF4C7192894271000A4A634 /* SwiftUIView.swift */,
 			);
 			name = MainScreens;
 			sourceTree = "<group>";
@@ -223,9 +232,12 @@
 				BC4D7FDC288579B700C5EC63 /* ContentView.swift in Sources */,
 				BCEACA31288EB726005D5BC4 /* StackController.swift in Sources */,
 				BCEACA2A288EA46E005D5BC4 /* ScreenDimension.swift in Sources */,
+				BCF4C71A2894271000A4A634 /* SwiftUIView.swift in Sources */,
 				BCEACA27288E9D4E005D5BC4 /* AnimationCompletion.swift in Sources */,
 				BC9F7E2A28901D6B002BBA64 /* CardModel.swift in Sources */,
 				BCEACA2E288EB504005D5BC4 /* ArrayExt.swift in Sources */,
+				BCFA48012892924E00CF4CFB /* CardController.swift in Sources */,
+				BC05599D289836C100D2F002 /* CardUpdate.swift in Sources */,
 				BC4D7FDA288579B700C5EC63 /* CardStackApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
